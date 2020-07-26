@@ -1,0 +1,9 @@
+{
+  "bindings": [
+    {
+      "name": "nextSinceId",
+      "type": "activityTrigger",
+      "direction": "in"
+    }
+  ]
+}

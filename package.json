@@ -1,0 +1,38 @@
+{
+  "name": "twcollector",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "yamachu <yamachu.dev@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "watch": "webpack --watch",
+    "webpack:local": "cross-env BUILD_TARGET=local webpack",
+    "webpack:azure": "cross-env BUILD_TARGET=azure webpack",
+    "webpack:all": "cross-env BUILD_TARGET=all webpack",
+    "prod:azure": "cross-env BUILD_TARGET=azure webpack --mode=production",
+    "start:local": "yarn run build && cross-env LOCAL=true node __dist/platform/local/index.js",
+    "pretest": "yarn build",
+    "test": "ava '__dist/**/*.test.js' -v"
+  },
+  "devDependencies": {
+    "@azure/functions": "1.2.2",
+    "@types/node-fetch": "2.5.7",
+    "@types/twitter": "1.7.0",
+    "ava": "3.11.0",
+    "cross-env": "7.0.2",
+    "prettier": "2.0.5",
+    "ts-loader": "8.0.1",
+    "typescript": "3.9.7",
+    "webpack": "4.44.0",
+    "webpack-cli": "3.3.12"
+  },
+  "dependencies": {
+    "dayjs": "1.8.30",
+    "dotenv": "8.2.0",
+    "durable-functions": "1.4.3",
+    "googleapis": "56.0.0",
+    "node-fetch": "2.6.0",
+    "twitter": "1.7.1"
+  }
+}

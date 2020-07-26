@@ -1,0 +1,9 @@
+/node_modules/
+/__dist/
+/__dev/
+/local/
+/azure/**/*.js
+
+.env
+.env.local
+*.log
