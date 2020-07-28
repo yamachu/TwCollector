@@ -1,7 +1,7 @@
 import Twitter, { AccessTokenOptions } from "twitter";
 import { ITweetFetchable, nopFetch } from ".";
 import { TweetEntity } from "../contract";
-import { lessThanByString } from "../util";
+import { asNumberComparable } from "../util";
 
 export const init = (
   token: Pick<
@@ -45,7 +45,9 @@ const fetch = (twitterInstance: Twitter, domain: string) => async (
     include_entities: true,
   });
 
+  const lessThanCompare = asNumberComparable(since_id ?? "0").lt;
+
   return (tweets.statuses as Array<TweetEntity>).filter((v) =>
-    lessThanByString(since_id ?? "0", v.id_str)
+    lessThanCompare(v.id_str)
   );
 };
