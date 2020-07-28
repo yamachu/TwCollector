@@ -1,5 +1,5 @@
 import test from "ava";
-import { trimBeginZeros, lessThanByString } from "./util";
+import { asNumberComparable, trimBeginZeros } from "./util";
 
 test("与えた文字列の先頭の0を除いた文字列を返す", (t) => {
   t.deepEqual(trimBeginZeros("00500"), "500");
@@ -7,8 +7,10 @@ test("与えた文字列の先頭の0を除いた文字列を返す", (t) => {
 });
 
 test("文字列で数字を比較できる", (t) => {
-  t.false(lessThanByString("01234", "123"));
-  t.false(lessThanByString("123", "123"));
-  t.true(lessThanByString("123456789012345", "123456789012346"));
-  t.true(lessThanByString("12345678901234", "123456789012346"));
+  t.false(asNumberComparable("01234").lt("123"));
+  t.false(asNumberComparable("123").lt("123"));
+  t.true(asNumberComparable("123456789012345").lt("123456789012346"));
+  t.true(asNumberComparable("12345678901234").lt("123456789012346"));
+
+  // Todo: 他の演算子のやつもtest
 });
