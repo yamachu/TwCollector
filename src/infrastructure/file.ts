@@ -10,7 +10,7 @@ import {
   nopStoreSummaries,
 } from ".";
 import { StoreSummary, TweetEntity } from "../contract";
-import { lessThanByString } from "../util";
+import { asNumberComparable } from "../util";
 
 export const init = (
   readTweetFile?: string,
@@ -50,11 +50,8 @@ const fetch = (fileName: string) => async (
       }
       try {
         const json: Array<TweetEntity> = JSON.parse(data);
-        resolve(
-          json.filter((entity) =>
-            lessThanByString(since_id ?? "0", entity.id_str)
-          )
-        );
+        const lessThanCompare = asNumberComparable(since_id ?? "0").lt;
+        resolve(json.filter((entity) => lessThanCompare(entity.id_str)));
       } catch (e) {
         reject(e);
       }
