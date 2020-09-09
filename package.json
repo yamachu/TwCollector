@@ -10,7 +10,7 @@
     "webpack:local": "cross-env BUILD_TARGET=local webpack",
     "webpack:azure": "cross-env BUILD_TARGET=azure webpack",
     "webpack:all": "cross-env BUILD_TARGET=all webpack",
-    "prod:azure": "cross-env BUILD_TARGET=azure webpack --mode=production",
+    "prod:azure": "cross-env BUILD_TARGET=azure NODE_OPTIONS='--max_old_space_size=4096' webpack --mode=production",
     "start:local": "yarn run build && cross-env LOCAL=true node __dist/platform/local/index.js",
     "pretest": "yarn build",
     "test": "ava '__dist/**/*.test.js' -v"
