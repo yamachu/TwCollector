@@ -7,7 +7,6 @@
       "direction": "in",
       "route": "orchestrators/DurableFunctionsOrchestrator",
       "methods": [
-        "post",
         "get"
       ]
     },
