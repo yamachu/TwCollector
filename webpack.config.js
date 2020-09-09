@@ -25,13 +25,6 @@ const getBuildTargets = (target) => {
           "./src/platform/azure/DurableFunctionsOrchestrator/index.ts"
         ),
       ],
-      [
-        "NextSinceIdEntity",
-        path.resolve(
-          __dirname,
-          "./src/platform/azure/NextSinceIdEntity/index.ts"
-        ),
-      ],
     ],
   };
   switch (target) {
