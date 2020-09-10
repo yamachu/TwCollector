@@ -2,7 +2,7 @@ export interface TweetEntity {
   created_at: string;
   id: BigInt;
   id_str: string; // https://twitter.com/i/web/status/ のここに入るやつ
-  text: string;
+  full_text: string;
   entities: {
     urls: {
       // b.hatena.ne.jp から始まるものははてなブックマーク経由、urlパラメータがない場合はリダイレクト

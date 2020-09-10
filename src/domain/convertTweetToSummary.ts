@@ -43,7 +43,7 @@ export const convertToTweetToSummary = (
       created_at: entity.created_at,
       user_id: entity.user.id,
       screen_name: entity.user.screen_name,
-      text: entity.text,
+      text: entity.full_text,
       followers_count: entity.user.followers_count,
       retweeted_id: entity.retweeted_status?.id ?? "",
       entry: [...entryUrl.keys()][0],
