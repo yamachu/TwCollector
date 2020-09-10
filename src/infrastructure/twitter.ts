@@ -45,9 +45,7 @@ const fetch = (twitterInstance: Twitter, domain: string) => async (
     include_entities: true,
   });
 
-  const lessThanCompare = asNumberComparable(since_id ?? "0").lt;
-
-  return (tweets.statuses as Array<TweetEntity>).filter((v) =>
-    lessThanCompare(v.id_str)
+  return (tweets.statuses as Array<TweetEntity>).filter(
+    (v) => BigInt(v.id) > BigInt(since_id ?? "0")
   );
 };

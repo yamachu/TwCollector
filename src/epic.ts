@@ -6,7 +6,7 @@ import {
   ISummaryStorable,
   ITweetFetchable,
 } from "./infrastructure";
-import { asNumberComparable, likePromiseAllSettled } from "./util";
+import { likePromiseAllSettled } from "./util";
 
 export const collectSummaries = async (
   fetch: ITweetFetchable["fetch"],
@@ -20,11 +20,13 @@ export const collectSummaries = async (
 ) => {
   const tweetEntities = await fetch(params.since_id);
   const maxTweetId = tweetEntities
-    .map((v) => v.id_str)
+    .map((v) => v.id)
     .reduce(
-      (prev, curr) => (asNumberComparable(prev).lt(curr) ? curr : prev),
-      params.since_id ?? "0"
-    );
+      (prev, curr) =>
+        BigInt(prev) < BigInt(curr) ? BigInt(curr) : BigInt(prev),
+      BigInt(params.since_id ?? "0")
+    )
+    .toString();
   const fn = convertToTweetToSummary(urlDetectors);
   const eitherSummaryOrEntity = await likePromiseAllSettled(
     tweetEntities.map((e) => fn(e))
