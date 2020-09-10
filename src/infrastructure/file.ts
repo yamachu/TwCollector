@@ -11,6 +11,10 @@ import {
 } from ".";
 import { StoreSummary, TweetEntity } from "../contract";
 import { asNumberComparable } from "../util";
+const JSONBig: {
+  stringify: typeof JSON.stringify;
+  parse: typeof JSON.parse;
+} = require("json-bigint");
 
 export const init = (
   readTweetFile?: string,
@@ -49,7 +53,7 @@ const fetch = (fileName: string) => async (
         return;
       }
       try {
-        const json: Array<TweetEntity> = JSON.parse(data);
+        const json: Array<TweetEntity> = JSONBig.parse(data);
         const lessThanCompare = asNumberComparable(since_id ?? "0").lt;
         resolve(json.filter((entity) => lessThanCompare(entity.id_str)));
       } catch (e) {
@@ -105,7 +109,7 @@ const storeJsonStringEntries = (fileName: string) => async (
   return new Promise((resolve, reject) => {
     writeFile(
       fileName,
-      entities.map((e) => JSON.stringify(e)).join("\n"),
+      entities.map((e) => JSONBig.stringify(e)).join("\n"),
       {
         encoding: "utf-8",
         flag: "a",
