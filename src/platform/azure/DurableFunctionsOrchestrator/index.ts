@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import * as df from "durable-functions";
 
 module.exports = df.orchestrator(function* (context) {
-  const currentValue: string = context.bindings.since_id;
+  const currentValue: string = context.bindingData.input.since_id;
   let mutable_next_since_id = currentValue;
 
   try {

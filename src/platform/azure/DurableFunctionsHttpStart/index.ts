@@ -7,7 +7,7 @@ module.exports = async function (context: Context, req: HttpRequest) {
   const instanceId = "infiniteLoopOrchestrator";
   const since_id = req.query.tweet_since_id ?? process.env.DEFAULT_SINCE_ID;
   await client.startNew("DurableFunctionsOrchestrator", instanceId, {
-    since_id: since_id,
+    since_id,
   });
 
   context.log(`Started orchestration with ID = '${instanceId}'.`);
