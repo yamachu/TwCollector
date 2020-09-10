@@ -46,15 +46,3 @@ test.cb("対象のドメインのURLをparse出来る", (t) => {
       t.end();
     });
 });
-
-test.cb("長いツイートで展開しないといけないURLも展開できる", (t) => {
-  parseEntryFromAnyUrl("teitoku-window.hatenablog.com")(
-    "https://twitter.com/i/web/status/1304065139507781633"
-  ).then((actual) => {
-    t.deepEqual(
-      actual,
-      "https://teitoku-window.hatenablog.com/entry/2020/07/28/230235"
-    );
-    t.end();
-  });
-});
