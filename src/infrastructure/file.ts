@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "fs";
+import JSONBig from "json-bigint";
 import {
   IFailedEntityStorable,
   IRawEntitiesDumpable,
@@ -11,10 +12,8 @@ import {
 } from ".";
 import { StoreSummary, TweetEntity } from "../contract";
 import { asNumberComparable, bigIntToStringReviver } from "../util";
-const JSONBig: {
-  stringify: typeof JSON.stringify;
-  parse: typeof JSON.parse;
-} = require("json-bigint");
+
+const JSONBigImpl = JSONBig({ useNativeBigInt: true });
 
 export const init = (
   readTweetFile?: string,
@@ -53,7 +52,7 @@ const fetch = (fileName: string) => async (
         return;
       }
       try {
-        const json: Array<TweetEntity> = JSONBig.parse(data);
+        const json: Array<TweetEntity> = JSONBigImpl.parse(data);
         const lessThanCompare = asNumberComparable(since_id ?? "0").lt;
         resolve(json.filter((entity) => lessThanCompare(entity.id_str)));
       } catch (e) {
