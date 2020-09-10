@@ -32,6 +32,7 @@
     "dotenv": "8.2.0",
     "durable-functions": "1.4.3",
     "googleapis": "56.0.0",
+    "json-bigint": "1.0.0",
     "node-fetch": "2.6.0",
     "twitter": "git+https://github.com/yamachu/node-twitter"
   }

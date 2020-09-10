@@ -9,6 +9,10 @@ import {
   nopStoreSummaries,
 } from ".";
 import { StoreSummary, TweetEntity } from "../contract";
+const JSONBig: {
+  stringify: typeof JSON.stringify;
+  parse: typeof JSON.parse;
+} = require("json-bigint");
 
 type Credentials = Parameters<
   GoogleApis["auth"]["OAuth2"]["prototype"]["setCredentials"]
@@ -119,7 +123,7 @@ const storeJsonStringEntries = (
         range: pageName,
         valueInputOption: "USER_ENTERED",
         requestBody: {
-          values: summaries.map((v) => [JSON.stringify(v)]).reverse(),
+          values: summaries.map((v) => [JSONBig.stringify(v)]).reverse(),
         },
       },
       (resp) => {

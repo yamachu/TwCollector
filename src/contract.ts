@@ -1,6 +1,6 @@
 export interface TweetEntity {
   created_at: string;
-  id: number;
+  id: BigInt;
   id_str: string; // https://twitter.com/i/web/status/ のここに入るやつ
   text: string;
   entities: {
