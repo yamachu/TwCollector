@@ -109,3 +109,13 @@ const asNumberComparableImpl = (
 
   return compareCharNumber(trimmedBase, trimmedCompareValue, 0, op);
 };
+
+export const bigIntToStringReviver = (
+  _key: string,
+  value: unknown
+): unknown => {
+  if (typeof value === "bigint") {
+    return value.toString();
+  }
+  return value;
+};

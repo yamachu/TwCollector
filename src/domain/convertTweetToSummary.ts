@@ -1,9 +1,6 @@
 import { SettledPromiseValue, StoreSummary, TweetEntity } from "../contract";
+import { bigIntToStringReviver } from "../util";
 import { IParseEntryFromUrl } from "./parseEntryFromUrl";
-const JSONBig: {
-  stringify: typeof JSON.stringify;
-  parse: typeof JSON.parse;
-} = require("json-bigint");
 
 export const convertToTweetToSummary = (
   urlDetectors: Array<IParseEntryFromUrl>
@@ -25,14 +22,24 @@ export const convertToTweetToSummary = (
     .then((v) => new Set(v));
 
   if (entryUrl.size === 0) {
-    console.error(`could not detect entry url: ${JSONBig.stringify(entity)}`);
+    console.error(
+      `could not detect entry url: ${JSON.stringify(
+        entity,
+        bigIntToStringReviver
+      )}`
+    );
     return Promise.resolve({
       status: "rejected",
       value: entity,
     });
   }
   if (entryUrl.size > 1) {
-    console.warn(`multiple entry url detected: ${JSONBig.stringify(entity)}`);
+    console.warn(
+      `multiple entry url detected: ${JSON.stringify(
+        entity,
+        bigIntToStringReviver
+      )}`
+    );
   }
 
   return Promise.resolve({

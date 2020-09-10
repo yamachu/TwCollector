@@ -10,7 +10,7 @@ import {
   nopStoreSummaries,
 } from ".";
 import { StoreSummary, TweetEntity } from "../contract";
-import { asNumberComparable } from "../util";
+import { asNumberComparable, bigIntToStringReviver } from "../util";
 const JSONBig: {
   stringify: typeof JSON.stringify;
   parse: typeof JSON.parse;
@@ -109,7 +109,7 @@ const storeJsonStringEntries = (fileName: string) => async (
   return new Promise((resolve, reject) => {
     writeFile(
       fileName,
-      entities.map((e) => JSONBig.stringify(e)).join("\n"),
+      entities.map((e) => JSON.stringify(e, bigIntToStringReviver)).join("\n"),
       {
         encoding: "utf-8",
         flag: "a",

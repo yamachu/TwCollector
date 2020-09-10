@@ -9,6 +9,7 @@ import {
   nopStoreSummaries,
 } from ".";
 import { StoreSummary, TweetEntity } from "../contract";
+import { bigIntToStringReviver } from "../util";
 
 type Credentials = Parameters<
   GoogleApis["auth"]["OAuth2"]["prototype"]["setCredentials"]
@@ -120,14 +121,7 @@ const storeJsonStringEntries = (
         valueInputOption: "USER_ENTERED",
         requestBody: {
           values: summaries
-            .map((v) => [
-              JSON.stringify(v, (_, value) => {
-                if (typeof value === "bigint") {
-                  return value.toString();
-                }
-                return value;
-              }),
-            ])
+            .map((v) => [JSON.stringify(v, bigIntToStringReviver)])
             .reverse(),
         },
       },
