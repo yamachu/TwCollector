@@ -43,6 +43,7 @@ const fetch = (twitterInstance: Twitter, domain: string) => async (
     count: 100,
     since_id: since_id,
     include_entities: true,
+    tweet_mode: "extended",
   });
 
   return (tweets.statuses as Array<TweetEntity>).filter(
