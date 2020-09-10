@@ -9,10 +9,6 @@ import {
   nopStoreSummaries,
 } from ".";
 import { StoreSummary, TweetEntity } from "../contract";
-const JSONBig: {
-  stringify: typeof JSON.stringify;
-  parse: typeof JSON.parse;
-} = require("json-bigint");
 
 type Credentials = Parameters<
   GoogleApis["auth"]["OAuth2"]["prototype"]["setCredentials"]
@@ -87,13 +83,13 @@ const storeSummaries = (
         requestBody: {
           values: summaries
             .map((v) => [
-              v.id,
+              v.id.toString(),
               v.id_str,
               dayjs(v.created_at).toDate(),
-              v.user_id,
+              v.user_id.toString(),
               v.screen_name,
-              v.followers_count,
-              v.retweeted_id,
+              v.followers_count.toString(),
+              v.retweeted_id.toString(),
               v.entry,
               v.text,
             ])
@@ -123,7 +119,16 @@ const storeJsonStringEntries = (
         range: pageName,
         valueInputOption: "USER_ENTERED",
         requestBody: {
-          values: summaries.map((v) => [JSONBig.stringify(v)]).reverse(),
+          values: summaries
+            .map((v) => [
+              JSON.stringify(v, (_, value) => {
+                if (typeof value === "bigint") {
+                  return value.toString();
+                }
+                return value;
+              }),
+            ])
+            .reverse(),
         },
       },
       (resp) => {
