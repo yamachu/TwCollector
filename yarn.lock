@@ -86,6 +86,11 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/json-bigint@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/json-bigint/-/json-bigint-1.0.0.tgz#7a4726540cc6fe47cfa54b9b3022b89cf7fe1517"
+  integrity sha512-WW+0cfH3ovFN6ROV+p/Xfw36dT6s16hbXBYIG49PYw6+j6e+AkpqYccctgxwyicBmC8CZDBnPhOH94shFhXgHQ==
+
 "@types/lodash@^4.14.119":
   version "4.14.158"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.158.tgz#b38ea8b6fe799acd076d7a8d7ab71c26ef77f785"

@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@azure/functions": "1.2.2",
+    "@types/json-bigint": "1.0.0",
     "@types/node-fetch": "2.5.7",
     "@types/twitter": "1.7.0",
     "ava": "3.11.0",
