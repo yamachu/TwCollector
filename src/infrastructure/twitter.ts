@@ -41,7 +41,7 @@ const fetch = (twitterInstance: Twitter, domain: string) => async (
   const tweets = await twitterInstance.get("search/tweets", {
     q: `url:${domain} include:nativeretweets`,
     count: 100,
-    since_id: since_id,
+    since_id: (BigInt(since_id ?? "0") + BigInt(1)).toString(),
     include_entities: true,
     tweet_mode: "extended",
   });
