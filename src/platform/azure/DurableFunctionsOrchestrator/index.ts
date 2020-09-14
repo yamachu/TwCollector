@@ -10,7 +10,7 @@ module.exports = df.orchestrator(function* (context) {
       next_since_id,
     }: { next_since_id: string } = yield context.df.callActivity(
       "DurableFunctionsMainActivity",
-      currentValue
+      (currentValue ?? "") + "n" // 数値として扱われていそうなので、文字列に強制的にキャスト
     );
     context.log(
       `current_since_id: ${currentValue}, next_since_id: ${next_since_id}`
