@@ -12,7 +12,7 @@ module.exports = async function (context: Context) {
     spreadsheet.dumpRawEntities,
     urlDetectors,
     {
-      since_id,
+      since_id: since_id.replace("n", ""),
     }
   );
   return {
