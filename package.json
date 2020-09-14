@@ -34,7 +34,7 @@
     "durable-functions": "1.4.3",
     "googleapis": "56.0.0",
     "json-bigint": "1.0.0",
-    "node-fetch": "2.6.0",
+    "node-fetch": "2.6.1",
     "twitter": "git+https://github.com/yamachu/node-twitter"
   }
 }
