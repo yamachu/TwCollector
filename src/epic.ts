@@ -20,7 +20,7 @@ export const collectSummaries = async (
 ) => {
   const tweetEntities = await fetch(params.since_id);
   const maxTweetId = tweetEntities
-    .map((v) => v.id)
+    .map((v) => v.id_str)
     .reduce(
       (prev, curr) =>
         BigInt(prev) < BigInt(curr) ? BigInt(curr) : BigInt(prev),
