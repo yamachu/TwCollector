@@ -47,6 +47,6 @@ const fetch = (twitterInstance: Twitter, domain: string) => async (
   });
 
   return (tweets.statuses as Array<TweetEntity>).filter(
-    (v) => BigInt(v.id) > BigInt(since_id ?? "0")
+    (v) => BigInt(v.id_str) > BigInt(since_id ?? "0")
   );
 };
